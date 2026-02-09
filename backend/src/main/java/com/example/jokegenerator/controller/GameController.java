@@ -112,11 +112,14 @@ public class GameController {
     }
 
     private User createDefaultUser(Long userId) {
-        User user = new User();
-        user.setId(userId);
-        user.setUsername("Player_" + userId);
-        user.setEmail("player" + userId + "@brainbreak.com");
-        user.setPassword("default_password_" + userId);
-        return userService.saveUser(user);
+        // Check if user already exists
+        return userService.findById(userId).orElseGet(() -> {
+            User user = new User();
+            user.setId(userId);
+            user.setUsername("Player_" + userId);
+            user.setEmail("player" + userId + "@brainbreak.com");
+            user.setPassword("default_password_" + userId);
+            return userService.saveUser(user);
+        });
     }
 }

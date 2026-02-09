@@ -16,12 +16,15 @@ public class AIController {
     private AIJokeService aiJokeService;
 
     @GetMapping("/joke")
-    public ResponseEntity<?> generateAIJoke(@RequestParam(defaultValue = "General") String category) {
+    public ResponseEntity<?> generateAIJoke(
+            @RequestParam(defaultValue = "General") String category,
+            @RequestParam(defaultValue = "en") String language) {
         try {
-            String joke = aiJokeService.generateAIJoke(category);
+            String joke = aiJokeService.generateAIJoke(category, language);
             return ResponseEntity.ok(Map.of(
                 "joke", joke,
                 "category", category,
+                "language", language,
                 "aiGenerated", true,
                 "timestamp", System.currentTimeMillis()
             ));

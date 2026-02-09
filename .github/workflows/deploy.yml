@@ -39,7 +39,6 @@ jobs:
       working-directory: ./frontend
       env:
         CI: false
-        REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'http://localhost:8080/api' }}
     
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
